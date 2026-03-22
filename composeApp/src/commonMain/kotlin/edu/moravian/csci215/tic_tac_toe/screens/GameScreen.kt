@@ -39,6 +39,7 @@ fun GameScreen(
                }
                Row {
                    Text(
+                       //placeholder text value
                        text = "HELLO WE DID IT",
                        fontSize = 50.sp,
                        textAlign = TextAlign.Center,
@@ -53,6 +54,7 @@ fun GameScreen(
                    modifier = Modifier
                        .safeContentPadding()
                ) {
+                    //this will not be here, it will just happen
                    Text(text = "Go to Game Over")
                }
        }

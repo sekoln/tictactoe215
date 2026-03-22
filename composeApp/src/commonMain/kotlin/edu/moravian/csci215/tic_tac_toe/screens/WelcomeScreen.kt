@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.serialization.Serializable
+import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
@@ -104,6 +105,7 @@ fun WelcomeScreen(
         }
         Row {
             Button(
+                //placeholder values!!!
                 onClick = { startGame("Easy AI", "Human") },
                 modifier = Modifier
                     .height(75.dp)
@@ -149,32 +151,36 @@ fun playerSideSetUp(playerNum: Int)
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
             ) {
+                val humanTypeString = stringResource(Res.string.humanType)
+                val easyAIString = stringResource(Res.string.easyAIType)
+                val mediumAIString = stringResource(Res.string.mediumAIType)
+                val hardAIString = stringResource(Res.string.hardAIType)
+
                 DropdownMenuItem(
-                    text = { Text(stringResource(Res.string.humanType)) },
+                    text = { Text(humanTypeString) },
                     onClick = {
-                        //see what to do about making this a string resource?
-                        option = "Human"
+                        option = humanTypeString
                         expanded = false
                     },
                 )
                 DropdownMenuItem(
-                    text = { Text(stringResource(Res.string.easyAIType)) },
+                    text = { Text(easyAIString) },
                     onClick = {
-                        option = "Easy AI"
+                        option = easyAIString
                         expanded = false
                     },
                 )
                 DropdownMenuItem(
-                    text = { Text(stringResource(Res.string.mediumAIType)) },
+                    text = { Text(mediumAIString) },
                     onClick = {
-                        option = "Medium AI"
+                        option = mediumAIString
                         expanded = false
                     },
                 )
                 DropdownMenuItem(
-                    text = { Text(stringResource(Res.string.hardAIType)) },
+                    text = { Text(hardAIString) },
                     onClick = {
-                        option = "Hard AI"
+                        option = hardAIString
                         expanded = false
                     },
                 )

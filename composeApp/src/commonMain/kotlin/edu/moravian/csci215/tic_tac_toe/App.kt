@@ -1,10 +1,13 @@
 package edu.moravian.csci215.tic_tac_toe
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key.Companion.R
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -56,7 +59,10 @@ fun App() {
                             ) {
                                 Icon(
                                     painter = painterResource(Res.drawable.arrow_left),
+                                    tint = Color.White,
                                     contentDescription = stringResource(Res.string.arrow_left),
+                                    modifier = Modifier
+                                        .size(35.dp)
                                 )
                             }
                         },
@@ -76,11 +82,11 @@ fun App() {
                 }
                 composable<Game> { navBackStackEntry ->
                     val gameRound = navBackStackEntry.toRoute<Game>()
-                    val level1 = gameRound.level1
-                    val level2 = gameRound.level2
+                    val type1 = gameRound.level1
+                    val type2 = gameRound.level2
                     GameScreen(
-                        level1,
-                        level2,
+                        type1,
+                        type2,
                         showSnackbar = {
                             coroutineScope.launch {
                                 snackbarHostState.showSnackbar(it)

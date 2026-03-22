@@ -10,4 +10,10 @@
     <string name="easyAIType">Easy AI</string>
     <string name="mediumAIType">Medium AI</string>
     <string name="hardAIType">Hard AI</string>
+    <string name="announceTie">It was a tie\uD83E\uDD7A</string>
+    <string name="announceVictory">Player %1$s won!🎉🎉🎉</string>
+    <string name="tieMessage">I do not know how to tie a tie 😔</string>
+    <string name="victoryMessage">Congrats, %1$s!🥳</string>
+    <string name="victoryStats">Player 1 Wins: %1$s\nPlayer 2 Wins: %2$s\nTies: %3$s</string>
+    <string name="playAgain">Start New Game</string>
 </resources>

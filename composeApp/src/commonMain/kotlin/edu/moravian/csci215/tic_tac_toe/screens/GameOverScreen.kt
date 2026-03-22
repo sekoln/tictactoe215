@@ -5,11 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Text
@@ -26,6 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import kotlinx.serialization.Serializable
+import org.jetbrains.compose.resources.stringResource
+import tictactoe.composeapp.generated.resources.Res
+import tictactoe.composeapp.generated.resources.announceTie
+import tictactoe.composeapp.generated.resources.announceVictory
+import tictactoe.composeapp.generated.resources.playAgain
+import tictactoe.composeapp.generated.resources.tieMessage
+import tictactoe.composeapp.generated.resources.victoryMessage
+import tictactoe.composeapp.generated.resources.victoryStats
 
 @Serializable
 data class GameOver(
@@ -72,26 +77,35 @@ fun GameOverScreen(
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             lineHeight = 1.5.em,
-            text = if (winnerNum == 0) "It was a tie\uD83E\uDD7A" else "🎉🎉🎉Player $winnerNum won!🎉🎉🎉",
+            text = if (winnerNum == 0)  {
+                stringResource(Res.string.announceTie)
+            } else {
+                stringResource(Res.string.announceVictory, winnerNum)
+            },
         )
         Text(
             fontSize = 25.sp,
             textAlign = TextAlign.Center,
             lineHeight = 1.5.em,
-            text = if (winnerNum == 0) "I do not know how to tie a tie 😔" else "Congrats, $winnerName!🥳",
+            text = if (winnerNum == 0) {
+                stringResource(Res.string.tieMessage)
+            } else {
+                stringResource(Res.string.victoryMessage, winnerName)
+            },
         )
         Spacer(modifier = Modifier.fillMaxHeight(0.1f))
         Text(
             fontSize = 30.sp,
             textAlign = TextAlign.Center,
             lineHeight = 1.5.em,
-            text = "Player 1 Wins: $player1wins\nPlayer 2 Wins: $player2wins\nTies: $ties",
+            text = stringResource(Res.string.victoryStats, player1wins, player2wins, ties),
         )
         ElevatedButton(
             modifier = Modifier.size(width = 200.dp, height = 100.dp),
+            //placeholder values!!!
             onClick = { startNewRound("Human", "Easy AI")},
         ) {
-            Text("Start New Game")
+            Text(stringResource(Res.string.playAgain))
         }
     }
 }
