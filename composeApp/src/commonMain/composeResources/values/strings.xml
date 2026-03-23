@@ -16,4 +16,5 @@
     <string name="victoryMessage">Congrats, %1$s!🥳</string>
     <string name="victoryStats">Player 1 Wins: %1$s\nPlayer 2 Wins: %2$s\nTies: %3$s</string>
     <string name="playAgain">Start New Game</string>
+    <string name="illegalMove">This spot is already taken!</string>
 </resources>

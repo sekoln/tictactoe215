@@ -104,9 +104,12 @@ fun WelcomeScreen(
             }
         }
         Row {
+            var selectedAll by remember { mutableStateOf(false) }
             Button(
-                //placeholder values!!!
-                onClick = { startGame("Easy AI", "Human") },
+                //TODO: placeholder values!!! also the snackbar goes here
+                onClick = {
+                    if (selectedAll) {
+                    startGame("Easy AI", "Human") }},
                 modifier = Modifier
                     .height(75.dp)
                     .width(125.dp)
@@ -145,7 +148,7 @@ fun playerSideSetUp(playerNum: Int)
                 Text(
                     text = option.ifEmpty { stringResource(Res.string.playerTypeSelection) },
                     fontSize = 12.sp
-                    )
+                )
             }
             DropdownMenu(
                 expanded = expanded,
@@ -200,4 +203,3 @@ fun playerSideSetUp(playerNum: Int)
         )
     }
 }
-

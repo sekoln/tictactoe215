@@ -29,8 +29,8 @@ import tictactoe.composeapp.generated.resources.Res
 
 @Serializable
 data class Game(
-    val level1: String = "Easy AI",
-    val level2: String = "Human",
+    val level1: String,
+    val level2: String
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -99,6 +99,7 @@ fun App() {
                 composable<GameOver> { navBackStackEntry ->
                     //val winner =
                     //val winnerNum =
+                    //TODO: placeholder values
                     GameOverScreen(
                         1, "Nora"
                     ) {level1, level2 ->
