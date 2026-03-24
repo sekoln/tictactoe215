@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,8 +33,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import edu.moravian.csci215.tic_tac_toe.game.Board
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
+import tictactoe.composeapp.generated.resources.announceTurn
 import tictactoe.composeapp.generated.resources.illegalMove
 import tictactoe.composeapp.generated.resources.welcome_to_app
 
@@ -55,47 +58,13 @@ fun GameScreen(
             .safeContentPadding()
             .fillMaxSize(),
     ) {
+        var playerNum by remember { mutableIntStateOf(0) }
+
         Text (
-            //TODO: implement game logic, put string in strings.xml
-            text = "Player ___, take your turn!"
+            text = stringResource(Res.string.announceTurn, playerNum)
         )
         Row {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(3),
-                contentPadding = PaddingValues(16.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalArrangement = Arrangement.Center
-            ) {
-                //TODO: doesnt show all when rotated
-                items(9) {
-                    val invalidMoveMessage = stringResource(Res.string.illegalMove)
-                    var isFilled by remember { mutableStateOf(false) }
-                    if (isFilled) {
-                        //swap these two
-                        Button (
-                            onClick = {showSnackbar(invalidMoveMessage)},
-                            modifier = Modifier
-                                .width(200.dp)
-                                .height(100.dp)
-                                .padding(8.dp)
-                                .border(2.dp, Color.Black)
-                        ) {
-                            Text(text = "Move made")
-                        }
-                    } else {
-                        TextButton(
-                            onClick = {isFilled = true},
-                            modifier = Modifier
-                                .width(200.dp)
-                                .height(100.dp)
-                                .padding(8.dp)
-                                .border(2.dp, Color.Black)
-                        ) {
-                            Text(text = "No move yet")
-                        }
-                    }
-                }
-            }
+            createBoard(showSnackbar)
         }
         Button(
             onClick = { navigateToGameOver(
@@ -106,6 +75,45 @@ fun GameScreen(
         ) {
             //TODO this will not be here, it will just happen
             Text(text = "Go to Game Over")
+        }
+    }
+}
+
+@Composable
+fun createBoard(
+    showSnackbar: (String) -> Unit) {
+    Column {
+        repeat(3) { rowIndex ->
+            Row {
+                repeat(3) { columnIndex ->
+                    val invalidMoveMessage = stringResource(Res.string.illegalMove)
+                    var isFilled by remember { mutableStateOf(false) }
+                    if (isFilled) {
+                        //swap these two
+                        Button (
+                            onClick = {showSnackbar(invalidMoveMessage)},
+                            modifier = Modifier
+                                //.width(200.dp)
+                                //.height(100.dp)
+                                .padding(8.dp)
+                                .border(2.dp, Color.Black)
+                        ) {
+                            Text(text = "Move made")
+                        }
+                    } else {
+                        TextButton(
+                            onClick = {isFilled = true},
+                            modifier = Modifier
+                                //.width(200.dp)
+                                //.height(100.dp)
+                                .padding(8.dp)
+                                .border(2.dp, Color.Black)
+                        ) {
+                            Text(text = "No move yet")
+                        }
+                    }
+                }
+            }
         }
     }
 }
