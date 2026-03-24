@@ -56,6 +56,7 @@ data object Welcome
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeScreen(
+    showSnackbar: (String) -> Unit,
     startGame: (level1: String, level2: String) -> Unit,
 ) {
     Column(
@@ -66,6 +67,10 @@ fun WelcomeScreen(
             .safeContentPadding()
             .fillMaxSize(),
     ) {
+        var player1Type by remember { mutableStateOf("") }
+        var player1Name by remember { mutableStateOf("") }
+        var player2Type by remember { mutableStateOf("") }
+        var player2Name by remember { mutableStateOf("") }
         Row {
             Row {
                 //app logo
@@ -93,23 +98,36 @@ fun WelcomeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                playerSideSetUp(1)
+                playerSideSetUp(playerNum = 1, selectedType = player1Type,
+                    onTypeChange = { player1Type = it },
+                    name = player1Name,
+                    onNameChange = { player1Name = it })
             }
             Column(
                 modifier = Modifier.width(190.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                playerSideSetUp(2)
+                playerSideSetUp(playerNum = 2,
+                    selectedType = player2Type,
+                    onTypeChange = { player2Type = it },
+                    name = player2Name,
+                    onNameChange = { player2Name = it })
             }
         }
         Row {
-            var selectedAll by remember { mutableStateOf(false) }
+
+            val filledInAll = player1Type.isNotBlank() && player1Name.isNotBlank() && player2Type.isNotBlank() && player2Name.isNotBlank()
+
             Button(
                 //TODO: placeholder values!!! also the snackbar goes here
                 onClick = {
-                    if (selectedAll) {
-                    startGame("Easy AI", "Human") }},
+                    if (filledInAll) {
+                    startGame(player1Type, player2Type)
+                    } else {
+                        showSnackbar("Missing player information!")
+                    }
+                          },
                 modifier = Modifier
                     .height(75.dp)
                     .width(125.dp)
@@ -127,13 +145,19 @@ fun WelcomeScreen(
  * Creates the player type and name selection
  */
 @Composable
-fun playerSideSetUp(playerNum: Int)
+fun playerSideSetUp(
+    playerNum: Int,
+    selectedType: String,
+    onTypeChange: (String) -> Unit,
+    name: String,
+    onNameChange: (String) -> Unit
+)
 {
     Row {
         Text(stringResource(Res.string.playerLabel, playerNum))
     }
     Row {
-        var option by remember { mutableStateOf("") }
+        val option = selectedType
         var expanded by remember { mutableStateOf(false) }
         Box(
             modifier = Modifier
@@ -162,28 +186,28 @@ fun playerSideSetUp(playerNum: Int)
                 DropdownMenuItem(
                     text = { Text(humanTypeString) },
                     onClick = {
-                        option = humanTypeString
+                        onTypeChange(humanTypeString)
                         expanded = false
                     },
                 )
                 DropdownMenuItem(
                     text = { Text(easyAIString) },
                     onClick = {
-                        option = easyAIString
+                        onTypeChange(easyAIString)
                         expanded = false
                     },
                 )
                 DropdownMenuItem(
                     text = { Text(mediumAIString) },
                     onClick = {
-                        option = mediumAIString
+                        onTypeChange(mediumAIString)
                         expanded = false
                     },
                 )
                 DropdownMenuItem(
                     text = { Text(hardAIString) },
                     onClick = {
-                        option = hardAIString
+                        onTypeChange(hardAIString)
                         expanded = false
                     },
                 )
@@ -191,10 +215,9 @@ fun playerSideSetUp(playerNum: Int)
         }
     }
     Row {
-        var text by remember { mutableStateOf("") }
         TextField(
-            value = text,
-            onValueChange = { newValue: String -> text = newValue },
+            value = name,
+            onValueChange = onNameChange,
             label = { Text(stringResource(Res.string.welcomeTextFieldPrompt, playerNum)) },
             singleLine = true,
             modifier = Modifier

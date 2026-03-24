@@ -76,7 +76,13 @@ fun App() {
                 modifier = Modifier.padding(innerPadding),
             ) {
                 composable<Welcome> {
-                    WelcomeScreen { level1, level2 ->
+                    WelcomeScreen(
+                        showSnackbar = {
+                            coroutineScope.launch {
+                                snackbarHostState.showSnackbar(it)
+                            }
+                        }
+                    ) { level1, level2 ->
                         navController.navigate(Game(level1, level2))
                     }
                 }
