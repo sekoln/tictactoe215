@@ -57,7 +57,7 @@ data object Welcome
 @Composable
 fun WelcomeScreen(
     showSnackbar: (String) -> Unit,
-    startGame: (level1: String, level2: String) -> Unit,
+    startGame: (player1Type: String, player2Type: String, player1Name: String, player2Name: String) -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -123,7 +123,7 @@ fun WelcomeScreen(
                 //TODO: placeholder values!!! also the snackbar goes here
                 onClick = {
                     if (filledInAll) {
-                    startGame(player1Type, player2Type)
+                    startGame(player1Type, player2Type, player1Name, player2Name)
                     } else {
                         showSnackbar("Missing player information!")
                     }

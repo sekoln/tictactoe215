@@ -34,9 +34,14 @@ import tictactoe.composeapp.generated.resources.victoryStats
 
 @Serializable
 data class GameOver(
+    val player1Type: String,
+    val player2Type: String,
+    val player1Name: String,
+    val player2Name: String,
     val player1wins: Int,
     val player2wins: Int,
     val ties: Int,
+    val currentWinner: String
 )
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -44,6 +49,7 @@ data class GameOver(
 fun GameOverScreen(
     winnerNum: Int,
     winnerName: String,
+    gameOver: GameOver,
     startNewRound: (level1: String, level2: String) -> Unit
 ) {
     var player1wins by remember { mutableIntStateOf(0) }

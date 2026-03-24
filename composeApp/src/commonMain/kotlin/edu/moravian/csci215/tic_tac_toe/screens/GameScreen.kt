@@ -42,8 +42,10 @@ import tictactoe.composeapp.generated.resources.welcome_to_app
 fun GameScreen(
     player1Type: String,
     player2Type: String,
+    player1Name: String,
+    player2Name: String,
     showSnackbar: (String) -> Unit,
-    navigateToGameOver: (player1Wins: Int, player2Wins: Int, ties: Int) -> Unit,
+    navigateToGameOver: (GameOver) -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -96,7 +98,9 @@ fun GameScreen(
             }
         }
         Button(
-            onClick = { navigateToGameOver(17, 12, 2700) },
+            onClick = { /*navigateToGameOver(
+                GameOver(12, 13, 2700)
+            )*/ },
             modifier = Modifier
                 .safeContentPadding()
         ) {
