@@ -38,10 +38,10 @@ data class GameOver(
     val player2Type: String,
     val player1Name: String,
     val player2Name: String,
-    val player1wins: Int,
-    val player2wins: Int,
-    val ties: Int,
-    val currentWinner: String
+    //val player1wins: Int,
+    //val player2wins: Int,
+    //val ties: Int,
+    //val currentWinner: String
 )
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -50,7 +50,7 @@ fun GameOverScreen(
     winnerNum: Int,
     winnerName: String,
     gameOver: GameOver,
-    startNewRound: (level1: String, level2: String) -> Unit
+    startNewRound: () -> Unit
 ) {
     var player1wins by remember { mutableIntStateOf(0) }
     var player2wins by remember { mutableIntStateOf(0) }
@@ -109,7 +109,7 @@ fun GameOverScreen(
         ElevatedButton(
             modifier = Modifier.size(width = 200.dp, height = 100.dp),
             //placeholder values!!!
-            onClick = { startNewRound("Human", "Easy AI")},
+            onClick = { startNewRound() },
         ) {
             Text(stringResource(Res.string.playAgain))
         }

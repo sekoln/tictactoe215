@@ -98,9 +98,9 @@ fun GameScreen(
             }
         }
         Button(
-            onClick = { /*navigateToGameOver(
-                GameOver(12, 13, 2700)
-            )*/ },
+            onClick = { navigateToGameOver(
+                GameOver(player1Type, player2Type, player1Name, player2Name)
+            ) },
             modifier = Modifier
                 .safeContentPadding()
         ) {

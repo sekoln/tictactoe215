@@ -30,7 +30,7 @@ data class Game(
     val player1Type: String,
     val player2Type: String,
     val player1Name: String,
-    val player2Name: String
+    val player2Name: String,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -102,22 +102,17 @@ fun App() {
                                 snackbarHostState.showSnackbar(it)
                             }
                         },
-                    ) { winner -> /*navController.navigate(
-                        GameOver(player1, player2, winner
+                    ) { navController.navigate(
+                        GameOver(player1Type, player2Type, player1Name, player2Name
                         )
-                    )*/
+                    )
                     }
                 }
                 composable<GameOver> { navBackStackEntry ->
-                    //val winner =
-                    //val winnerNum =
-                    //TODO: placeholder values
                     val gameOver = navBackStackEntry.toRoute<GameOver>()
                     GameOverScreen(
                         1, "Nora", gameOver
-                    ) { level1, level2 ->
-                        //navController.navigate(Game(level1, level2))
-                    }
+                    ) { navController.navigateUp() }
                 }
             }
         }
