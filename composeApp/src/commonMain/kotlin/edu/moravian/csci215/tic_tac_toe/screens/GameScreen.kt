@@ -93,8 +93,8 @@ fun createBoard(
                         Button (
                             onClick = {showSnackbar(invalidMoveMessage)},
                             modifier = Modifier
-                                //.width(200.dp)
-                                //.height(100.dp)
+                                .width(100.dp)
+                                .height(100.dp)
                                 .padding(8.dp)
                                 .border(2.dp, Color.Black)
                         ) {
@@ -104,8 +104,8 @@ fun createBoard(
                         TextButton(
                             onClick = {isFilled = true},
                             modifier = Modifier
-                                //.width(200.dp)
-                                //.height(100.dp)
+                                .width(100.dp)
+                                .height(100.dp)
                                 .padding(8.dp)
                                 .border(2.dp, Color.Black)
                         ) {
