@@ -1,16 +1,15 @@
 package edu.moravian.csci215.tic_tac_toe.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,9 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -31,27 +28,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.serialization.Serializable
-import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
-import tictactoe.composeapp.generated.resources.arrow_left
-import tictactoe.composeapp.generated.resources.icacoe
-import tictactoe.composeapp.generated.resources.easyAIType
-import tictactoe.composeapp.generated.resources.hardAIType
-import tictactoe.composeapp.generated.resources.humanType
-import tictactoe.composeapp.generated.resources.mediumAIType
-import tictactoe.composeapp.generated.resources.missing_player_info
-import tictactoe.composeapp.generated.resources.playerLabel
-import tictactoe.composeapp.generated.resources.playerTypeSelection
-import tictactoe.composeapp.generated.resources.start
-import tictactoe.composeapp.generated.resources.welcomeTextFieldPrompt
-import tictactoe.composeapp.generated.resources.welcome_to_app
+import tictactoe.composeapp.generated.resources.*
 
 @Serializable
 data object Welcome
@@ -74,18 +59,25 @@ fun WelcomeScreen(
         var player1Name by remember { mutableStateOf("") }
         var player2Type by remember { mutableStateOf("") }
         var player2Name by remember { mutableStateOf("") }
-        Row {
-            Row {
-                //app logo
-                Icon(
-                    painter = painterResource(Res.drawable.icacoe),
+        Column {
+            Row (
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ){
+                Image(
+                    painter = painterResource(Res.drawable.logo),
                     contentDescription = "App Logo",
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(200.dp)
                         .padding(16.dp)
                 )
             }
-            Row {
+            Row (
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text(
                     text = stringResource(Res.string.welcome_to_app),
                     fontSize = 50.sp,

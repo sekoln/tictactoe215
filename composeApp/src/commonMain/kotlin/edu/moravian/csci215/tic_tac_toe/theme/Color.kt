@@ -1,4 +1,4 @@
-package edu.moravian.csci215.geoquiz
+package edu.moravian.csci215.tic_tac_toe.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF161719)

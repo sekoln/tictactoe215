@@ -37,9 +37,7 @@ import edu.moravian.csci215.tic_tac_toe.game.Board
 import edu.moravian.csci215.tic_tac_toe.game.Board.Companion.toStringRepresentation
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
-import tictactoe.composeapp.generated.resources.announceTurn
-import tictactoe.composeapp.generated.resources.illegalMove
-import tictactoe.composeapp.generated.resources.welcome_to_app
+import tictactoe.composeapp.generated.resources.*
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
