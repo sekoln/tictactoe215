@@ -19,4 +19,11 @@
     <string name="playAgain">Start New Game</string>
     <string name="illegalMove">This spot is already taken!</string>
     <string name="announceTurn">Player %1$s, take your turn!</string>
+    <string-array name="names">
+        <item>Lili</item>
+        <item>Nora</item>
+        <item>Tic</item>
+        <item>Tac</item>
+        <item>Toe</item>
+    </string-array>
 </resources>

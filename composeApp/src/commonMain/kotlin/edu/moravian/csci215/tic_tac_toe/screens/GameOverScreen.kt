@@ -57,6 +57,8 @@ fun GameOverScreen(
 
     // store a var that  increases win count or tie
 
+
+    //TODO: make tally work
     if (winnerNum == 0) {
         gameOver.ties + 1
     } else if (winnerNum == 1) {

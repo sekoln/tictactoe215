@@ -28,15 +28,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key.Companion.R
 import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
 import tictactoe.composeapp.generated.resources.*
+import kotlin.random.Random
 
 @Serializable
 data object Welcome
@@ -227,4 +230,11 @@ fun playerSideSetUp(
                 .width(120.dp),
         )
     }
+}
+
+@Composable
+fun nameGenerator(): String {
+    val nameList = stringArrayResource(Res.array.names)
+    var randomIndex = Random.nextInt(0, nameList.size)
+    return nameList[randomIndex]
 }

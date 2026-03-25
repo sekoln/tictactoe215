@@ -36,6 +36,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.moravian.csci215.tic_tac_toe.game.Board
 import edu.moravian.csci215.tic_tac_toe.game.Board.Companion.toStringRepresentation
+import edu.moravian.csci215.tic_tac_toe.game.EasyAIPlayer
+import edu.moravian.csci215.tic_tac_toe.game.HardAIPlayer
+import edu.moravian.csci215.tic_tac_toe.game.HumanPlayer
+import edu.moravian.csci215.tic_tac_toe.game.MediumAIPlayer
+import edu.moravian.csci215.tic_tac_toe.game.Player
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
 import tictactoe.composeapp.generated.resources.*
@@ -86,6 +91,8 @@ fun GameScreen(
             .fillMaxSize(),
     ) {
         var playerNum by remember { mutableIntStateOf(0) }
+        val player1Difficulty = convertToPlayer(player1Type)
+        val player2Difficulty = convertToPlayer(player2Type)
 
         Text (
             text = stringResource(Res.string.announceTurn, playerNum)
@@ -97,8 +104,18 @@ fun GameScreen(
             })
         }
 
-
     }
+}
+
+@Composable
+fun convertToPlayer(playerString: String): Player {
+    when (playerString) {
+        stringResource(Res.string.humanType) -> return HumanPlayer()
+        stringResource(Res.string.easyAIType) -> return  EasyAIPlayer()
+        stringResource(Res.string.mediumAIType) -> return MediumAIPlayer()
+        stringResource(Res.string.hardAIType) -> return HardAIPlayer()
+    }
+    return HumanPlayer()
 }
 
 @Composable
