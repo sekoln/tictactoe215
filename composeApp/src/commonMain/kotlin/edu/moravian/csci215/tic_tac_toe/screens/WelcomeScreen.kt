@@ -72,8 +72,7 @@ fun WelcomeScreen(
                     painter = painterResource(Res.drawable.logo),
                     contentDescription = "App Logo",
                     modifier = Modifier
-                        .size(200.dp)
-                        .padding(16.dp)
+                        .size(300.dp)
                 )
             }
             Row (
