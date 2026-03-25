@@ -18,6 +18,7 @@ import edu.moravian.csci215.tic_tac_toe.screens.GameOverScreen
 import edu.moravian.csci215.tic_tac_toe.screens.GameScreen
 import edu.moravian.csci215.tic_tac_toe.screens.Welcome
 import edu.moravian.csci215.tic_tac_toe.screens.WelcomeScreen
+import edu.moravian.csci215.tic_tac_toe.theme.AppTheme
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.painterResource
@@ -36,7 +37,7 @@ data class Game(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
-    MaterialTheme {
+    AppTheme {
         val snackbarHostState = remember { SnackbarHostState() }
         val coroutineScope = rememberCoroutineScope()
         val navController = rememberNavController()
