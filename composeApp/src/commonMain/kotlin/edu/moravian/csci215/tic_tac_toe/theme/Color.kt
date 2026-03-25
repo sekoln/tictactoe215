@@ -1,4 +1,4 @@
-package com.example.compose
+package edu.moravian.csci215.geoquiz
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF161719)
