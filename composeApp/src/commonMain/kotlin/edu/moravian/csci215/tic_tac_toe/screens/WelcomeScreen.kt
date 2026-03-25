@@ -74,6 +74,13 @@ fun WelcomeScreen(
         Row {
             Row {
                 //app logo
+                Icon(
+                    painter = painterResource(Res.drawable.ic_launcher_foreground),
+                    contentDescription = "App Logo",
+                    modifier = Modifier
+                        .size(100.dp)
+                        .padding(16.dp)
+                )
             }
             Row {
                 Text(
