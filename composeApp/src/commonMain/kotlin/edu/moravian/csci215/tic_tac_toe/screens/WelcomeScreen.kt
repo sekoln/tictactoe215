@@ -58,10 +58,14 @@ fun WelcomeScreen(
             .safeContentPadding()
             .fillMaxSize(),
     ) {
+        val nameList = stringArrayResource(Res.array.names)
+        var randomIndex1 = Random.nextInt(0, nameList.size)
+        var randomIndex2 = Random.nextInt(0, nameList.size)
+
         var player1Type by remember { mutableStateOf("") }
-        var player1Name by remember { mutableStateOf("") }
+        var player1Name by remember { mutableStateOf(nameList[randomIndex1]) }
         var player2Type by remember { mutableStateOf("") }
-        var player2Name by remember { mutableStateOf("") }
+        var player2Name by remember { mutableStateOf(nameList[randomIndex2]) }
         Column {
             Row (
                 horizontalArrangement = Arrangement.Center,
@@ -229,11 +233,4 @@ fun playerSideSetUp(
                 .width(120.dp),
         )
     }
-}
-
-@Composable
-fun nameGenerator(): String {
-    val nameList = stringArrayResource(Res.array.names)
-    var randomIndex = Random.nextInt(0, nameList.size)
-    return nameList[randomIndex]
 }
