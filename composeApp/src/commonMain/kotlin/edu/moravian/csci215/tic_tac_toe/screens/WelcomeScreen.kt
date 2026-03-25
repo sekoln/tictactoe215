@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
@@ -40,6 +41,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
 import tictactoe.composeapp.generated.resources.arrow_left
+import tictactoe.composeapp.generated.resources.icacoe
 import tictactoe.composeapp.generated.resources.easyAIType
 import tictactoe.composeapp.generated.resources.hardAIType
 import tictactoe.composeapp.generated.resources.humanType
@@ -61,7 +63,7 @@ fun WelcomeScreen(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.SpaceAround,
         modifier = Modifier
             .background(MaterialTheme.colorScheme.primaryContainer)
             .safeContentPadding()
@@ -75,7 +77,7 @@ fun WelcomeScreen(
             Row {
                 //app logo
                 Icon(
-                    painter = painterResource(Res.drawable.ic_launcher_foreground),
+                    painter = painterResource(Res.drawable.icacoe),
                     contentDescription = "App Logo",
                     modifier = Modifier
                         .size(100.dp)

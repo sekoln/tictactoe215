@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.moravian.csci215.tic_tac_toe.game.Board
+import edu.moravian.csci215.tic_tac_toe.game.Board.Companion.toStringRepresentation
 import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.Res
 import tictactoe.composeapp.generated.resources.announceTurn
@@ -50,6 +51,8 @@ fun GameScreen(
     showSnackbar: (String) -> Unit,
     navigateToGameOver: (GameOver) -> Unit,
 ) {
+    var board by remember { mutableStateOf(Board())}
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
@@ -64,52 +67,63 @@ fun GameScreen(
             text = stringResource(Res.string.announceTurn, playerNum)
         )
         Row {
-            createBoard(showSnackbar)
+            createBoard(showSnackbar, board, {r, c ->
+                val newBoard = board.playPiece(r, c)
+                if (newBoard != null) {board = newBoard}
+            })
         }
-        Button(
-            onClick = { navigateToGameOver(
-                GameOver(player1Type, player2Type, player1Name, player2Name)
-            ) },
-            modifier = Modifier
-                .safeContentPadding()
-        ) {
-            //TODO this will not be here, it will just happen
-            Text(text = "Go to Game Over")
-        }
+
+        if (board.isGameOver) { navigateToGameOver(GameOver(player1Type, player2Type, player1Name, player2Name) )}
+//        //TODO: placeholder, this won't actually be here
+//        Button(
+//            onClick = { navigateToGameOver(
+//                GameOver(player1Type, player2Type, player1Name, player2Name)
+//            ) },
+//            modifier = Modifier
+//                .safeContentPadding()
+//        ) {
+//            Text(text = "Go to Game Over")
+//        }
     }
 }
 
 @Composable
 fun createBoard(
-    showSnackbar: (String) -> Unit) {
+    showSnackbar: (String) -> Unit,
+    board: Board,
+    onClick: (Int, Int) -> Unit
+) {
     Column {
         repeat(3) { rowIndex ->
             Row {
                 repeat(3) { columnIndex ->
                     val invalidMoveMessage = stringResource(Res.string.illegalMove)
                     var isFilled by remember { mutableStateOf(false) }
+
                     if (isFilled) {
-                        //swap these two
                         Button (
-                            onClick = {showSnackbar(invalidMoveMessage)},
+                            onClick = { showSnackbar(invalidMoveMessage) },
                             modifier = Modifier
                                 .width(100.dp)
                                 .height(100.dp)
                                 .padding(8.dp)
                                 .border(2.dp, Color.Black)
                         ) {
-                            Text(text = "Move made")
+                            Text(text = board.get(rowIndex, columnIndex).toString())
                         }
                     } else {
                         TextButton(
-                            onClick = {isFilled = true},
+                            onClick = {
+                                onClick(rowIndex, columnIndex)
+                                isFilled = true
+                            },
                             modifier = Modifier
                                 .width(100.dp)
                                 .height(100.dp)
                                 .padding(8.dp)
                                 .border(2.dp, Color.Black)
                         ) {
-                            Text(text = "No move yet")
+                            Text(text = "")
                         }
                     }
                 }
