@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -50,6 +51,31 @@ fun GameScreen(
     navigateToGameOver: (Int, String, Int, Int, Int) -> Unit,
 ) {
     var board by remember { mutableStateOf(Board())}
+    var player1Wins by remember { mutableIntStateOf(0)}
+    var player2Wins by remember { mutableIntStateOf(0)}
+    var ties by remember { mutableIntStateOf(0)}
+    var winnerNum by remember {mutableIntStateOf(0)}
+    var winnerName by remember { mutableStateOf("")}
+
+    LaunchedEffect(board) {
+        if (board.isGameOver) {
+            if (board.hasWon('X')) {
+                winnerNum = 1
+                winnerName = player1Name
+                player1Wins++
+            } else if (board.hasWon('O')) {
+                winnerNum = 2
+                winnerName = player2Name
+                player2Wins++
+            } else if (board.hasTied) {
+                winnerNum = 0
+                winnerName = ""
+                ties++
+            }
+            navigateToGameOver(winnerNum, winnerName, player1Wins, player2Wins, ties)
+            return@LaunchedEffect
+        }
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -70,13 +96,8 @@ fun GameScreen(
                 if (newBoard != null) {board = newBoard}
             })
         }
-        //TODO: default values rn
-        val winnerNum = 1
-        val winnerName = "Lili"
-        val player1Wins = 23
-        val player2Wins = 24
-        val ties = 3
-        if (board.isGameOver) { navigateToGameOver(winnerNum, winnerName, player1Wins, player2Wins, ties)}
+
+
     }
 }
 
