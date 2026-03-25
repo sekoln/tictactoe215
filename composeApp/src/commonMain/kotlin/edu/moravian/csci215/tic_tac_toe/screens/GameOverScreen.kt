@@ -49,9 +49,6 @@ fun GameOverScreen(
     gameOver: GameOver,
     startNewRound: () -> Unit
 ) {
-    var player1wins by remember { mutableIntStateOf(0) }
-    var player2wins by remember { mutableIntStateOf(0) }
-    var ties by remember { mutableIntStateOf(0) }
     // header at the top with back arrow to game screen and "tic-tac-toe" title
     // player __ won!
     // Congrats winner
@@ -61,11 +58,11 @@ fun GameOverScreen(
     // store a var that  increases win count or tie
 
     if (winnerNum == 0) {
-        ties++
+        gameOver.ties + 1
     } else if (winnerNum == 1) {
-        player1wins++
+        gameOver.player1wins + 1
     } else if (winnerNum == 2) {
-        player2wins++
+        gameOver.player2wins + 1
     }
 
     Column(
@@ -101,11 +98,10 @@ fun GameOverScreen(
             fontSize = 30.sp,
             textAlign = TextAlign.Center,
             lineHeight = 1.5.em,
-            text = stringResource(Res.string.victoryStats, player1wins, player2wins, ties),
+            text = stringResource(Res.string.victoryStats, gameOver.player1wins, gameOver.player2wins, gameOver.ties),
         )
         ElevatedButton(
             modifier = Modifier.size(width = 200.dp, height = 100.dp),
-            //placeholder values!!!
             onClick = { startNewRound() },
         ) {
             Text(stringResource(Res.string.playAgain))
