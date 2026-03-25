@@ -102,16 +102,13 @@ fun App() {
                                 snackbarHostState.showSnackbar(it)
                             }
                         },
-                    ) { navController.navigate(
-                        GameOver(player1Type, player2Type, player1Name, player2Name
-                        )
-                    )
+                    ) { winnerNum: Int, winnerName: String, player1Wins, player2Wins, ties ->
+                        navController.navigate(GameOver(winnerNum, winnerName, player1Wins, player2Wins, ties))
                     }
                 }
                 composable<GameOver> { navBackStackEntry ->
                     val gameOver = navBackStackEntry.toRoute<GameOver>()
-                    GameOverScreen(
-                        1, "Nora", gameOver
+                    GameOverScreen(gameOver.winnerNum, gameOver.winnerName, gameOver
                     ) { navController.navigateUp() }
                 }
             }

@@ -34,14 +34,11 @@ import tictactoe.composeapp.generated.resources.victoryStats
 
 @Serializable
 data class GameOver(
-    val player1Type: String,
-    val player2Type: String,
-    val player1Name: String,
-    val player2Name: String,
-    //val player1wins: Int,
-    //val player2wins: Int,
-    //val ties: Int,
-    //val currentWinner: String
+    val winnerNum: Int,
+    val winnerName: String,
+    val player1wins: Int,
+    val player2wins: Int,
+    val ties: Int,
 )
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)

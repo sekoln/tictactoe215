@@ -2,6 +2,7 @@
     <string name="start">Start!</string>
     <string name="app_name">Tic-Tac-Toe</string>
     <string name="welcome_to_app">Welcome to Tic-Tac-Toe!</string>
+    <string name="missing_player_info">Missing player information!</string>
     <string name="arrow_left">Back arrow</string>
     <string name="playerLabel">Player %1$s</string>
     <string name="welcomeTextFieldPrompt">Player %1$s Name</string>

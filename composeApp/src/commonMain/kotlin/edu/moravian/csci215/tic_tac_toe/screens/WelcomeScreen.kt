@@ -46,6 +46,7 @@ import tictactoe.composeapp.generated.resources.easyAIType
 import tictactoe.composeapp.generated.resources.hardAIType
 import tictactoe.composeapp.generated.resources.humanType
 import tictactoe.composeapp.generated.resources.mediumAIType
+import tictactoe.composeapp.generated.resources.missing_player_info
 import tictactoe.composeapp.generated.resources.playerLabel
 import tictactoe.composeapp.generated.resources.playerTypeSelection
 import tictactoe.composeapp.generated.resources.start
@@ -127,14 +128,14 @@ fun WelcomeScreen(
         Row {
 
             val filledInAll = player1Type.isNotBlank() && player1Name.isNotBlank() && player2Type.isNotBlank() && player2Name.isNotBlank()
+            val missingInfoString = stringResource(Res.string.missing_player_info)
 
             Button(
-                //TODO: placeholder values!!! also the snackbar goes here
                 onClick = {
                     if (filledInAll) {
                     startGame(player1Type, player2Type, player1Name, player2Name)
                     } else {
-                        showSnackbar("Missing player information!")
+                        showSnackbar(missingInfoString)
                     }
                           },
                 modifier = Modifier

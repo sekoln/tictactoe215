@@ -49,13 +49,13 @@ fun GameScreen(
     player1Name: String,
     player2Name: String,
     showSnackbar: (String) -> Unit,
-    navigateToGameOver: (GameOver) -> Unit,
+    navigateToGameOver: (Int, String, Int, Int, Int) -> Unit,
 ) {
     var board by remember { mutableStateOf(Board())}
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround,
+        verticalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .background(MaterialTheme.colorScheme.primaryContainer)
             .safeContentPadding()
@@ -72,18 +72,13 @@ fun GameScreen(
                 if (newBoard != null) {board = newBoard}
             })
         }
-
-        if (board.isGameOver) { navigateToGameOver(GameOver(player1Type, player2Type, player1Name, player2Name) )}
-//        //TODO: placeholder, this won't actually be here
-//        Button(
-//            onClick = { navigateToGameOver(
-//                GameOver(player1Type, player2Type, player1Name, player2Name)
-//            ) },
-//            modifier = Modifier
-//                .safeContentPadding()
-//        ) {
-//            Text(text = "Go to Game Over")
-//        }
+        //TODO: default values rn
+        val winnerNum = 1
+        val winnerName = "Lili"
+        val player1Wins = 23
+        val player2Wins = 24
+        val ties = 3
+        if (board.isGameOver) { navigateToGameOver(winnerNum, winnerName, player1Wins, player2Wins, ties)}
     }
 }
 
