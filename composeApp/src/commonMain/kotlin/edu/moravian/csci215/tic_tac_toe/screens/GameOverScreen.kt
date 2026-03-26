@@ -37,6 +37,24 @@ data class GameOver(
     val ties: Int,
 )
 
+/**
+ * Game over screen composable.
+ *
+ * Displays:
+ * - The result of the game (win or tie)
+ * - A message announcing the winner or tie
+ * - Current game statistics (player 1 wins, player 2 wins, ties)
+ * - A button to start a new round
+ *
+ * Behavior:
+ * - If winnerNum == 0 → shows tie messages
+ * - Otherwise → shows which player won and their name
+ *
+ * @param winnerNum The winning player number (1, 2, or 0 for tie)
+ * @param winnerName The name of the winning player (empty if tie)
+ * @param gameOver Object containing cumulative game statistics
+ * @param startNewRound Callback triggered when "Play Again" is pressed
+ */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun GameOverScreen(

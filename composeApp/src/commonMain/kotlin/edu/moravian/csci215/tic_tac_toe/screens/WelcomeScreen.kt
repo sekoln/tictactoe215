@@ -42,6 +42,21 @@ import kotlin.random.Random
 @Serializable
 data object Welcome
 
+/**
+ * Main welcome screen composable.
+ *
+ * Handles:
+ * - Displaying app logo
+ * - Allowing both players to select:
+ *      - Player type (Human / AI difficulty)
+ *      - Player name
+ * - Generating default random names
+ * - Validating input before starting the game
+ * - Triggering navigation to the game screen
+ *
+ * @param showSnackbar Displays error messages (e.g., missing input)
+ * @param startGame Callback to begin the game with selected player data
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeScreen(
@@ -152,7 +167,18 @@ fun WelcomeScreen(
 }
 
 /**
- * Creates the player type and name selection
+ * Composable that handles setup for one player.
+ *
+ * Includes:
+ * - Player label (Player 1 / Player 2)
+ * - Dropdown menu to select player type (Human or AI difficulty)
+ * - TextField to input or edit player name
+ *
+ * @param playerNum The player number (1 or 2)
+ * @param selectedType Currently selected player type
+ * @param onTypeChange Callback when player type changes
+ * @param name Current player name
+ * @param onNameChange Callback when name is updated
  */
 @Composable
 fun PlayerSideSetUp(

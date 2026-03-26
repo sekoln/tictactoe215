@@ -39,6 +39,23 @@ import org.jetbrains.compose.resources.stringResource
 import tictactoe.composeapp.generated.resources.*
 import tictactoe.composeapp.generated.resources.Res
 
+/**
+ * Main game screen composable.
+ *
+ * Handles:
+ * - Game state (board, scores, winner tracking)
+ * - Detecting game over conditions
+ * - Updating win/tie counts
+ * - Navigating to the game over screen
+ * - Rendering the board UI
+ *
+ * @param player1Type Type of player 1 (human or AI difficulty)
+ * @param player2Type Type of player 2 (human or AI difficulty)
+ * @param player1Name Display name of player 1
+ * @param player2Name Display name of player 2
+ * @param showSnackbar Function to display messages (e.g., invalid move)
+ * @param navigateToGameOver Callback to navigate to the game over screen with results
+ */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun GameScreen(
@@ -103,6 +120,12 @@ fun GameScreen(
     }
 }
 
+/**
+ * Converts a string representation of a player type into a corresponding Player object.
+ *
+ * @param playerString String describing the player type
+ * @return Corresponding Player instance
+ */
 @Composable
 fun convertToPlayer(playerString: String): Player {
     when (playerString) {
@@ -114,6 +137,19 @@ fun convertToPlayer(playerString: String): Player {
     return HumanPlayer()
 }
 
+/**
+ * Composable that renders the 3x3 Tic-Tac-Toe board.
+ *
+ * Handles:
+ * - Displaying each cell
+ * - Handling user clicks
+ * - Preventing moves on already filled cells
+ * - Showing a snackbar message for invalid moves
+ *
+ * @param showSnackbar Function to display error messages
+ * @param board Current game board state
+ * @param onClick Callback when a cell is clicked (row, column)
+ */
 @Composable
 fun CreateBoard(
     showSnackbar: (String) -> Unit,

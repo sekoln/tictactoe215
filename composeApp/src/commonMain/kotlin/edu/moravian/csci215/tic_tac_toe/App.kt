@@ -33,6 +33,22 @@ data class Game(
     val player2Name: String,
 )
 
+/**
+ * Root composable for the application.
+ *
+ * Handles:
+ * - Managing global game state (wins and ties)
+ * - Setting up the app theme and layout
+ * - Handling navigation between screens:
+ *      - Welcome screen
+ *      - Game screen
+ *      - Game over screen
+ * - Displaying a top app bar (except on the welcome screen)
+ * - Managing snackbar messages
+ *
+ * Navigation flow:
+ * Welcome → Game → GameOver → back to Game/Welcome
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
