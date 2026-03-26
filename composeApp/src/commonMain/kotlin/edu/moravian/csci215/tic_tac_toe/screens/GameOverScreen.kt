@@ -106,7 +106,10 @@ fun GameOverScreen(
             modifier = Modifier.size(width = 200.dp, height = 100.dp),
             onClick = { startNewRound() },
         ) {
-            Text(stringResource(Res.string.playAgain))
+            Text(
+                text = stringResource(Res.string.playAgain),
+                fontSize = 20.sp
+            )
         }
     }
 }

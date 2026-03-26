@@ -37,6 +37,9 @@ data class Game(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
+    var player1Wins by remember { mutableIntStateOf(0) }
+    var player2Wins by remember { mutableIntStateOf(0) }
+    var ties by remember { mutableIntStateOf(0) }
     AppTheme {
         val snackbarHostState = remember { SnackbarHostState() }
         val coroutineScope = rememberCoroutineScope()
@@ -103,7 +106,12 @@ fun App() {
                                 snackbarHostState.showSnackbar(it)
                             }
                         },
-                    ) { winnerNum: Int, winnerName: String, player1Wins, player2Wins, ties ->
+                    ) { winnerNum: Int, winnerName: String, _, _, _ ->
+                        when (winnerNum) {
+                            0 -> ties++
+                            1 -> player1Wins++
+                            2 -> player2Wins++
+                        }
                         navController.navigate(GameOver(winnerNum, winnerName, player1Wins, player2Wins, ties))
                     }
                 }
