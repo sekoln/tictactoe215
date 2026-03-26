@@ -18,7 +18,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -29,8 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.Key.Companion.R
-import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,8 +35,8 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
-import tictactoe.composeapp.generated.resources.Res
 import tictactoe.composeapp.generated.resources.*
+import tictactoe.composeapp.generated.resources.Res
 import kotlin.random.Random
 
 @Serializable
@@ -60,30 +57,30 @@ fun WelcomeScreen(
             .fillMaxSize(),
     ) {
         val nameList = stringArrayResource(Res.array.names)
-        var randomIndex1 = Random.nextInt(0, nameList.size)
-        var randomIndex2 = Random.nextInt(0, nameList.size)
+        val randomIndex1 = Random.nextInt(0, nameList.size)
+        val randomIndex2 = Random.nextInt(0, nameList.size)
 
         var player1Type by remember { mutableStateOf("") }
         var player1Name by remember { mutableStateOf(nameList[randomIndex1]) }
         var player2Type by remember { mutableStateOf("") }
         var player2Name by remember { mutableStateOf(nameList[randomIndex2]) }
         Column {
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ){
+                modifier = Modifier.fillMaxWidth(),
+            ) {
                 Image(
                     painter = painterResource(Res.drawable.logo),
                     contentDescription = "App Logo",
                     modifier = Modifier
-                        .size(300.dp)
+                        .size(300.dp),
                 )
             }
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
                     text = stringResource(Res.string.welcome_to_app),
@@ -91,7 +88,7 @@ fun WelcomeScreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .safeContentPadding(),
-                    lineHeight = 60.sp
+                    lineHeight = 60.sp,
                 )
             }
         }
@@ -100,50 +97,54 @@ fun WelcomeScreen(
                 .fillMaxWidth()
                 .safeContentPadding(),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(
                 modifier = Modifier.width(190.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
-                playerSideSetUp(playerNum = 1, selectedType = player1Type,
+                PlayerSideSetUp(
+                    playerNum = 1,
+                    selectedType = player1Type,
                     onTypeChange = { player1Type = it },
                     name = player1Name,
-                    onNameChange = { player1Name = it })
+                    onNameChange = { player1Name = it },
+                )
             }
             Column(
                 modifier = Modifier.width(190.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
-                playerSideSetUp(playerNum = 2,
+                PlayerSideSetUp(
+                    playerNum = 2,
                     selectedType = player2Type,
                     onTypeChange = { player2Type = it },
                     name = player2Name,
-                    onNameChange = { player2Name = it })
+                    onNameChange = { player2Name = it },
+                )
             }
         }
         Row {
-
             val filledInAll = player1Type.isNotBlank() && player1Name.isNotBlank() && player2Type.isNotBlank() && player2Name.isNotBlank()
             val missingInfoString = stringResource(Res.string.missing_player_info)
 
             Button(
                 onClick = {
                     if (filledInAll) {
-                    startGame(player1Type, player2Type, player1Name, player2Name)
+                        startGame(player1Type, player2Type, player1Name, player2Name)
                     } else {
                         showSnackbar(missingInfoString)
                     }
-                          },
+                },
                 modifier = Modifier
                     .height(75.dp)
-                    .width(125.dp)
+                    .width(125.dp),
             ) {
                 Text(
                     stringResource(Res.string.start),
-                    fontSize = 25.sp
+                    fontSize = 25.sp,
                 )
             }
         }
@@ -154,19 +155,17 @@ fun WelcomeScreen(
  * Creates the player type and name selection
  */
 @Composable
-fun playerSideSetUp(
+fun PlayerSideSetUp(
     playerNum: Int,
     selectedType: String,
     onTypeChange: (String) -> Unit,
     name: String,
-    onNameChange: (String) -> Unit
-)
-{
+    onNameChange: (String) -> Unit,
+) {
     Row {
         Text(stringResource(Res.string.playerLabel, playerNum))
     }
     Row {
-        val option = selectedType
         var expanded by remember { mutableStateOf(false) }
         Box(
             modifier = Modifier
@@ -177,11 +176,11 @@ fun playerSideSetUp(
                 shape = RoundedCornerShape(4.dp),
                 modifier = Modifier
                     .height(50.dp)
-                    .width(200.dp)
+                    .width(200.dp),
             ) {
                 Text(
-                    text = option.ifEmpty { stringResource(Res.string.playerTypeSelection) },
-                    fontSize = 12.sp
+                    text = selectedType.ifEmpty { stringResource(Res.string.playerTypeSelection) },
+                    fontSize = 12.sp,
                 )
             }
             DropdownMenu(

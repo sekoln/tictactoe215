@@ -1,5 +1,4 @@
 package edu.moravian.csci215.tic_tac_toe
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.*
@@ -44,7 +43,6 @@ fun App() {
         val snackbarHostState = remember { SnackbarHostState() }
         val coroutineScope = rememberCoroutineScope()
         val navController = rememberNavController()
-        // AppTheme {
         Scaffold(
             snackbarHost = { SnackbarHost(snackbarHostState) },
             topBar = {
@@ -66,7 +64,7 @@ fun App() {
                                     tint = Color.White,
                                     contentDescription = stringResource(Res.string.arrow_left),
                                     modifier = Modifier
-                                        .size(35.dp)
+                                        .size(35.dp),
                                 )
                             }
                         },
@@ -85,7 +83,7 @@ fun App() {
                             coroutineScope.launch {
                                 snackbarHostState.showSnackbar(it)
                             }
-                        }
+                        },
                     ) { player1Type, player2Type, player1Name, player2Name ->
                         navController.navigate(Game(player1Type, player2Type, player1Name, player2Name))
                     }
@@ -117,8 +115,7 @@ fun App() {
                 }
                 composable<GameOver> { navBackStackEntry ->
                     val gameOver = navBackStackEntry.toRoute<GameOver>()
-                    GameOverScreen(gameOver.winnerNum, gameOver.winnerName, gameOver
-                    ) { navController.navigateUp() }
+                    GameOverScreen(gameOver.winnerNum, gameOver.winnerName, gameOver) { navController.navigateUp() }
                 }
             }
         }

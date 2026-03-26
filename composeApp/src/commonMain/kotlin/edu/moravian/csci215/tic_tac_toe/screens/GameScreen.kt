@@ -1,28 +1,21 @@
 package edu.moravian.csci215.tic_tac_toe.screens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -37,15 +30,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.moravian.csci215.tic_tac_toe.game.Board
-import edu.moravian.csci215.tic_tac_toe.game.Board.Companion.toStringRepresentation
 import edu.moravian.csci215.tic_tac_toe.game.EasyAIPlayer
 import edu.moravian.csci215.tic_tac_toe.game.HardAIPlayer
 import edu.moravian.csci215.tic_tac_toe.game.HumanPlayer
 import edu.moravian.csci215.tic_tac_toe.game.MediumAIPlayer
 import edu.moravian.csci215.tic_tac_toe.game.Player
 import org.jetbrains.compose.resources.stringResource
-import tictactoe.composeapp.generated.resources.Res
 import tictactoe.composeapp.generated.resources.*
+import tictactoe.composeapp.generated.resources.Res
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -57,12 +49,12 @@ fun GameScreen(
     showSnackbar: (String) -> Unit,
     navigateToGameOver: (Int, String, Int, Int, Int) -> Unit,
 ) {
-    var board by remember { mutableStateOf(Board())}
-    var player1Wins by remember { mutableIntStateOf(0)}
-    var player2Wins by remember { mutableIntStateOf(0)}
-    var ties by remember { mutableIntStateOf(0)}
-    var winnerNum by remember {mutableIntStateOf(0)}
-    var winnerName by remember { mutableStateOf("")}
+    var board by remember { mutableStateOf(Board()) }
+    var player1Wins by remember { mutableIntStateOf(0) }
+    var player2Wins by remember { mutableIntStateOf(0) }
+    var ties by remember { mutableIntStateOf(0) }
+    var winnerNum by remember { mutableIntStateOf(0) }
+    var winnerName by remember { mutableStateOf("") }
 
     LaunchedEffect(board) {
         if (board.isGameOver) {
@@ -96,17 +88,18 @@ fun GameScreen(
         val player1Difficulty = convertToPlayer(player1Type)
         val player2Difficulty = convertToPlayer(player2Type)
 
-        Text (
+        Text(
             text = stringResource(Res.string.announceTurn, playerNum),
             fontSize = 30.sp,
         )
         Row {
-            createBoard(showSnackbar, board, {r, c ->
+            CreateBoard(showSnackbar, board, { r, c ->
                 val newBoard = board.playPiece(r, c)
-                if (newBoard != null) {board = newBoard}
+                if (newBoard != null) {
+                    board = newBoard
+                }
             })
         }
-
     }
 }
 
@@ -114,7 +107,7 @@ fun GameScreen(
 fun convertToPlayer(playerString: String): Player {
     when (playerString) {
         stringResource(Res.string.humanType) -> return HumanPlayer()
-        stringResource(Res.string.easyAIType) -> return  EasyAIPlayer()
+        stringResource(Res.string.easyAIType) -> return EasyAIPlayer()
         stringResource(Res.string.mediumAIType) -> return MediumAIPlayer()
         stringResource(Res.string.hardAIType) -> return HardAIPlayer()
     }
@@ -122,10 +115,10 @@ fun convertToPlayer(playerString: String): Player {
 }
 
 @Composable
-fun createBoard(
+fun CreateBoard(
     showSnackbar: (String) -> Unit,
     board: Board,
-    onClick: (Int, Int) -> Unit
+    onClick: (Int, Int) -> Unit,
 ) {
     Column {
         repeat(3) { rowIndex ->
@@ -137,19 +130,19 @@ fun createBoard(
                     var isFilled by remember { mutableStateOf(false) }
 
                     if (isFilled) {
-                        Button (
+                        Button(
                             onClick = { showSnackbar(invalidMoveMessage) },
                             shape = RoundedCornerShape(0.dp),
                             modifier = Modifier
                                 .width(100.dp)
                                 .height(100.dp)
                                 .padding(8.dp)
-                                .border(2.dp, Color.Black)
+                                .border(2.dp, Color.Black),
                         ) {
                             Text(
                                 text = board.get(rowIndex, columnIndex).toString(),
                                 fontSize = 50.sp,
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Center,
                             )
                         }
                     } else {
@@ -163,7 +156,7 @@ fun createBoard(
                                 .width(100.dp)
                                 .height(100.dp)
                                 .padding(8.dp)
-                                .border(2.dp, Color.Black)
+                                .border(2.dp, Color.Black),
                         ) {
                             Text(text = "")
                         }

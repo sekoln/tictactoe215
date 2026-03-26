@@ -11,10 +11,6 @@ import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -47,26 +43,8 @@ fun GameOverScreen(
     winnerNum: Int,
     winnerName: String,
     gameOver: GameOver,
-    startNewRound: () -> Unit
+    startNewRound: () -> Unit,
 ) {
-    // header at the top with back arrow to game screen and "tic-tac-toe" title
-    // player __ won!
-    // Congrats winner
-    // tally of each player wins and ties
-    // start new game (bring to gamescreen)
-
-    // store a var that  increases win count or tie
-
-
-    //TODO: make tally work
-    if (winnerNum == 0) {
-        gameOver.ties + 1
-    } else if (winnerNum == 1) {
-        gameOver.player1wins + 1
-    } else if (winnerNum == 2) {
-        gameOver.player2wins + 1
-    }
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -79,7 +57,7 @@ fun GameOverScreen(
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             lineHeight = 1.5.em,
-            text = if (winnerNum == 0)  {
+            text = if (winnerNum == 0) {
                 stringResource(Res.string.announceTie)
             } else {
                 stringResource(Res.string.announceVictory, winnerNum)
@@ -108,7 +86,7 @@ fun GameOverScreen(
         ) {
             Text(
                 text = stringResource(Res.string.playAgain),
-                fontSize = 20.sp
+                fontSize = 20.sp,
             )
         }
     }

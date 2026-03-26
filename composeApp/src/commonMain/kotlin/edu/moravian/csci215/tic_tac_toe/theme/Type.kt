@@ -5,17 +5,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.Font
-import tictactoe.composeapp.generated.resources.Res
 import tictactoe.composeapp.generated.resources.*
-
+import tictactoe.composeapp.generated.resources.Res
 
 @Composable
 fun appTypography(): Typography {
     val displayFontFamily = FontFamily(
-        Font(Res.font.chetta_vissto, FontWeight.Normal)
+        Font(Res.font.chetta_vissto, FontWeight.Normal),
     )
     val bodyFontFamily = FontFamily(
-        Font(Res.font.big_caslon, FontWeight.Normal)
+        Font(Res.font.big_caslon, FontWeight.Normal),
     )
 
     val baseline = Typography()
