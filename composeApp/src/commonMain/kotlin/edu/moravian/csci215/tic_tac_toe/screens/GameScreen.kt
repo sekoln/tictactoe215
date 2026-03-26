@@ -18,9 +18,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -95,7 +97,8 @@ fun GameScreen(
         val player2Difficulty = convertToPlayer(player2Type)
 
         Text (
-            text = stringResource(Res.string.announceTurn, playerNum)
+            text = stringResource(Res.string.announceTurn, playerNum),
+            fontSize = 30.sp,
         )
         Row {
             createBoard(showSnackbar, board, {r, c ->
@@ -126,21 +129,28 @@ fun createBoard(
 ) {
     Column {
         repeat(3) { rowIndex ->
+
             Row {
                 repeat(3) { columnIndex ->
+
                     val invalidMoveMessage = stringResource(Res.string.illegalMove)
                     var isFilled by remember { mutableStateOf(false) }
 
                     if (isFilled) {
                         Button (
                             onClick = { showSnackbar(invalidMoveMessage) },
+                            shape = RoundedCornerShape(0.dp),
                             modifier = Modifier
                                 .width(100.dp)
                                 .height(100.dp)
                                 .padding(8.dp)
                                 .border(2.dp, Color.Black)
                         ) {
-                            Text(text = board.get(rowIndex, columnIndex).toString())
+                            Text(
+                                text = board.get(rowIndex, columnIndex).toString(),
+                                fontSize = 50.sp,
+                                textAlign = TextAlign.Center
+                            )
                         }
                     } else {
                         TextButton(
@@ -148,6 +158,7 @@ fun createBoard(
                                 onClick(rowIndex, columnIndex)
                                 isFilled = true
                             },
+                            shape = RoundedCornerShape(0.dp),
                             modifier = Modifier
                                 .width(100.dp)
                                 .height(100.dp)
