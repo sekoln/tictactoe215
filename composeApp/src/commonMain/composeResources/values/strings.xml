@@ -25,5 +25,9 @@
         <item>Tic</item>
         <item>Tac</item>
         <item>Toe</item>
+        <item>Eenie</item>
+        <item>Meenie</item>
+        <item>Minie</item>
+        <item>Moe</item>
     </string-array>
 </resources>
